@@ -1,0 +1,34 @@
+{
+  "name": "node-red-contrib-sendgrid",
+  "version": "0.0.1",
+  "description": "Node-RED node for SendGrid service",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuhito/node-red-contrib-sendgrid.git"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "*"
+  },
+  "node-red" : {
+    "nodes": {
+      "sendgrid": "node.js"
+    }
+  },
+  "keywords": [
+    "node-red",
+    "sendgrid",
+    "mail",
+    "email",
+    "e-mail"
+  ],
+  "author": "zuhito",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zuhito/node-red-contrib-sendgrid/issues"
+  },
+  "homepage": "https://github.com/zuhito/node-red-contrib-sendgrid#readme"
+}
