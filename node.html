@@ -3,7 +3,13 @@
         category: 'social',
         color: '#a6bbcf',
         defaults: {
+            name: {value:""},
+            to: {value:""},
+            title: {value:""},
             name: {value:""}
+        },
+        credentials: {
+            apikey: {type:"password"},
         },
         inputs:1,
         outputs:0,
@@ -16,11 +22,27 @@
 
 <script type="text/x-red" data-template-name="sendgrid">
     <div class="form-row">
+        <label for="node-input-apikey"><i class="icon-tag"></i> <a href="http://app.sendgrid.com" target="_blank">API Key</a></label>
+        <input type="password" id="node-input-password">
+    </div>
+    <div class="form-row">
+        <label for="node-input-from"><i class="icon-tag"></i> From</label>
+        <input type="text" id="node-input-from" placeholder="example@example.com">
+    </div>
+    <div class="form-row">
+        <label for="node-input-to"><i class="icon-tag"></i> To</label>
+        <input type="text" id="node-input-to" placeholder="yourem@iladdress.com">
+    </div>
+    <div class="form-row">
+        <label for="node-input-title"><i class="icon-tag"></i> Title</label>
+        <input type="text" id="node-input-title">
+    </div>
+    <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="sendgrid">
-    <p>A simple node that converts the message payloads into all lower-case characters</p>
+    <p>E-mail sending node using SendGrid services</p>
 </script>
