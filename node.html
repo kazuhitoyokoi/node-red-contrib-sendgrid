@@ -1,15 +1,14 @@
 <script type="text/javascript">
     RED.nodes.registerType('sendgrid',{
         category: 'social',
-        color: '#a6bbcf',
+        color: '#489be8',
         defaults: {
-            name: {value:""},
+            from: {value:""},
             to: {value:""},
-            title: {value:""},
             name: {value:""}
         },
         credentials: {
-            apikey: {type:"password"},
+            key: {type:"password"},
         },
         inputs:1,
         outputs:0,
@@ -22,8 +21,8 @@
 
 <script type="text/x-red" data-template-name="sendgrid">
     <div class="form-row">
-        <label for="node-input-apikey"><i class="icon-tag"></i> <a href="http://app.sendgrid.com" target="_blank">API Key</a></label>
-        <input type="password" id="node-input-password">
+        <label for="node-input-key"><i class="icon-tag"></i> <a href="http://app.sendgrid.com" target="_blank">API Key</a></label>
+        <input type="password" id="node-input-key" placeholder="Paste API Key created in SendGrid settings">
     </div>
     <div class="form-row">
         <label for="node-input-from"><i class="icon-tag"></i> From</label>
@@ -31,11 +30,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-to"><i class="icon-tag"></i> To</label>
-        <input type="text" id="node-input-to" placeholder="yourem@iladdress.com">
-    </div>
-    <div class="form-row">
-        <label for="node-input-title"><i class="icon-tag"></i> Title</label>
-        <input type="text" id="node-input-title">
+        <input type="text" id="node-input-to" placeholder="youremail@ddress.com">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -44,5 +39,10 @@
 </script>
 
 <script type="text/x-red" data-help-name="sendgrid">
-    <p>E-mail sending node using SendGrid services</p>
+    <p>E-mail sending node using SendGrid service.</p>
+    <p>Sends the <code>msg.payload</code> as an email, with a subject of <code>msg.topic</code>.</p>
+    <p>The default message recipient can be configured in the node, if it is left
+    blank it should be set using the <code>msg.to</code> property of the incoming message.
+    you can also specify <code>msg.cc</code> and/or <code>msg.bcc</code> properties.</p>
+    <p>You can set sender of <code>msg.from</code> in the payload.</p>
 </script>

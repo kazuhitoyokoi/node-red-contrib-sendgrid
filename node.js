@@ -3,15 +3,23 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         var node = this;
         node.on('input', function(msg) {
+            this.status({fill:"green",shape:"dot",text:"sending"});
             const sgMail = require('@sendgrid/mail');
             sgMail.setApiKey(this.credentials.key);
-            msg = {
-              to: new String(config.to),// || msg.to,
-              from: new String(config.from),// || msg.from || 'example@example.com',
-              subject: new String(config.title),// || msg.topic || msg.title || 'Message from Node-RED',
-              text: new String(msg.payload)
+            var data = {
+                from: config.from || msg.from,
+                to: config.to || msg.to,
+                cc: msg.cc,
+                bcc: msg.bcc,                
+                subject: msg.topic || msg.title || 'Message from Node-RED',
+                text: msg.payload.toString()
             };
-            sgMail.send(msg);
+            sgMail.send(data, function(err) {
+                if (err) {
+                    node.error(err.toString(), msg);
+                }
+            });
+            this.status({});            
         });
     }
     RED.nodes.registerType("sendgrid", SendGridNode, {
