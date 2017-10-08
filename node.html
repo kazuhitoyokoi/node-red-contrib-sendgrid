@@ -13,6 +13,7 @@
         inputs:1,
         outputs:0,
         icon: "envelope.png",
+        align: "right",
         label: function() {
             return this.name||"sendgrid";
         }
@@ -21,7 +22,7 @@
 
 <script type="text/x-red" data-template-name="sendgrid">
     <div class="form-row">
-        <label for="node-input-key"><i class="icon-tag"></i> <a href="http://app.sendgrid.com" target="_blank">API Key</a></label>
+        <label for="node-input-key"><i class="icon-tag"></i> API Key</label>
         <input type="password" id="node-input-key" placeholder="Paste API Key created in SendGrid settings">
     </div>
     <div class="form-row">
@@ -40,6 +41,7 @@
 
 <script type="text/x-red" data-help-name="sendgrid">
     <p>E-mail sending node using SendGrid service.</p>
+    <p>You need to get API key from SendGrid website (<a href="https://sendgrid.com" target="_blank">https://sendgrid.com</a>).</p>
     <p>Sends the <code>msg.payload</code> as an email, with a subject of <code>msg.topic</code>.</p>
     <p>The default message recipient can be configured in the node, if it is left
     blank it should be set using the <code>msg.to</code> property of the incoming message.

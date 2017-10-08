@@ -7,7 +7,7 @@ Default e-mail node sometimes encounters login problem occurred from unusual beh
 ## How to use 
 (1) Install SendGrid node (node-red-contrib-sendgrid) using manage palette in Node-RED
 
-(2) Get API key from SendGrid website ( http://app.sendgrid.com/ )
+(2) Get API key from SendGrid website ( https://sendgrid.com/ )
 
 (3) Paste the API key on property of SendGrid node
 ![property](property.png)
