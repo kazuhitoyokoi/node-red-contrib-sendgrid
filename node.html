@@ -5,7 +5,8 @@
         defaults: {
             from: {value:""},
             to: {value:""},
-            name: {value:""}
+            name: {value:""},
+            content: {value:"text"}
         },
         credentials: {
             key: {type:"password"},
@@ -36,6 +37,13 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-content"><i class="fa fa-code"></i> Content Type</label>
+        <select id="node-input-content">
+            <option>text</option>
+            <option>html</option>
+        </select>
     </div>
 </script>
 
