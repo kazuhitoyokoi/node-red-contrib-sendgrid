@@ -6,21 +6,28 @@ module.exports = function(RED) {
             this.status({fill:"green",shape:"dot",text:"sending"});
             const sgMail = require('@sendgrid/mail');
             sgMail.setApiKey(this.credentials.key);
-            var data = {
-                from: config.from || msg.from,
-                to: config.to || msg.to,
-                cc: msg.cc,
-                bcc: msg.bcc,                
-                subject: msg.topic || msg.title || 'Message from Node-RED',
-                
-                if (config.content === "html"){
-                    html: msg.payload.toString()
-                }
-                else
-                {
-                    text: msg.payload.toString()
-                }
-            };
+
+ 	    if (config.content === "html"){
+            	var data = {
+                	from: config.from || msg.from,
+                	to: config.to || msg.to,
+                	cc: msg.cc,
+                	bcc: msg.bcc,                
+                	subject: msg.topic || msg.title || 'Message from Node-RED',
+                	html: msg.payload.toString()
+            	};
+	    }
+            else
+            {
+                var data = {
+                        from: config.from || msg.from,
+                        to: config.to || msg.to,
+                        cc: msg.cc,
+                        bcc: msg.bcc,
+                        subject: msg.topic || msg.title || 'Message from Node-RED',
+                        text: msg.payload.toString()
+		};
+            }
             sgMail.send(data, function(err) {
                 if (err) {
                     node.error(err.toString(), msg);
