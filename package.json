@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-sendgrid",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Sending e-mail node using SendGrid service",
   "main": "node.js",
   "scripts": {
