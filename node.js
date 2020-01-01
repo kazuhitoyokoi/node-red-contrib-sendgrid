@@ -1,44 +1,53 @@
-module.exports = function(RED) {
+module.exports = function (RED) {
+    'use strict';
     function SendGridNode(config) {
-        RED.nodes.createNode(this,config);
+        RED.nodes.createNode(this, config);
         var node = this;
-        node.on('input', function(msg) {
-            this.status({fill:"green",shape:"dot",text:"sending"});
-            const sgMail = require('@sendgrid/mail');
-            sgMail.setApiKey(this.credentials.key);
+        node.on('input', function (msg, send, done) {
+            send = send || function() {
+                node.send.apply(node, arguments);
+            };
+            node.status({fill: "blue", shape: "dot", text: "sendgrid.status.sending"});
 
- 	    if (config.content === "html"){
-            	var data = {
-                	from: config.from || msg.from,
-                	to: config.to || msg.to,
-                	cc: msg.cc,
-                	bcc: msg.bcc,                
-                	subject: msg.topic || msg.title || 'Message from Node-RED',
-                	html: msg.payload.toString()
-            	};
-	    }
-            else
-            {
-                var data = {
-                        from: config.from || msg.from,
-                        to: config.to || msg.to,
-                        cc: msg.cc,
-                        bcc: msg.bcc,
-                        subject: msg.topic || msg.title || 'Message from Node-RED',
-                        text: msg.payload.toString()
-		};
+            const sgMail = require('@sendgrid/mail');
+            sgMail.setApiKey(node.credentials.key);
+
+            var data = {
+                from: config.from || msg.from,
+                to: config.to || msg.to,
+                cc: msg.cc,
+                bcc: msg.bcc,
+                subject: msg.topic || msg.title || 'Message from Node-RED',
+            };
+
+            if (config.content === "html") {
+                data.html = msg.payload.toString();
+            } else {
+                data.text = msg.payload.toString();
             }
-            sgMail.send(data, function(err) {
+
+            sgMail.send(data, function (err) {
                 if (err) {
-                    node.error(err.toString(), msg);
+                    node.status({fill: "red", shape: "ring", text: "sendgrid.status.sendfail"});
+                    if (done) {
+                        done(err.toString());
+                    } else {
+                        node.error(err.toString(), msg);
+                    }
+                } else {
+                    if (done) {
+                        done();
+                    }
+                    setTimeout(function () {
+                        node.status({});
+                    }, 1000);
                 }
             });
-            this.status({});            
         });
     }
     RED.nodes.registerType("sendgrid", SendGridNode, {
         credentials: {
-            key: {type:"password"}
+            key: {type: "password"}
         }
     });
-}
+};

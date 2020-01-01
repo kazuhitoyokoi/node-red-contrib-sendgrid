@@ -1,0 +1,7 @@
+<script type="text/html" data-help-name="sendgrid">
+    <p>SendGridサービスを使用する電子メール送信ノード。</p>
+    <p>本ノードを使用するためには、SendGridウェブサイトからAPIキーを取得する必要があります(<a href="https://sendgrid.com" target="_blank">https://sendgrid.com</a>)。</p>
+    <p><code>msg.payload</code>の内容を電子メールとして送信します。<code>msg.topic</code>を指定した場合は、電子メールの件名として使用します。</p>
+    <p>メッセージ受信者はノードに設定します。宛先を指定しない場合、メッセージの<code>msg.to</code>プロパティを使用して設定する必要があります。 <code>msg.cc</code>および/または<code>msg.bcc</code>プロパティを指定することもできます。</p>
+    <p><code>msg.from</code>には、送信者を設定できます。</p>
+</script>

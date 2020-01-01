@@ -1,0 +1,17 @@
+{
+    "sendgrid": {
+        "label": {
+            "apiKey": "APIキー",
+            "apiKeyPlaceholder": "SendGrid設定ページのAPIキーを貼り付けてください",
+            "from": "送信元",
+            "to": "宛先",
+            "format": "形式",
+            "text": "テキスト",
+            "html": "HTML"
+        },
+        "status": {
+            "sending": "送信中",
+            "sendfail": "送信失敗"
+        }
+    }
+}

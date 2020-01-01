@@ -1,0 +1,9 @@
+<script type="text/html" data-help-name="sendgrid">
+    <p>E-mail sending node using SendGrid service.</p>
+    <p>You need to get an API key from the SendGrid website (<a href="https://sendgrid.com" target="_blank">https://sendgrid.com</a>).</p>
+    <p>Sends the <code>msg.payload</code> as an email, with a subject of <code>msg.topic</code>.</p>
+    <p>The default message recipient can be configured in the node. If it is left
+    blank it should be set using the <code>msg.to</code> property of the incoming message.
+    you can also specify <code>msg.cc</code> and/or <code>msg.bcc</code> properties.</p>
+    <p>You can set sender in <code>msg.from</code> of the payload.</p>
+</script>
