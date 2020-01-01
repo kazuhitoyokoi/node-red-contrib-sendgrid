@@ -19,11 +19,32 @@ module.exports = function (RED) {
                 bcc: msg.bcc,
                 subject: msg.topic || msg.title || 'Message from Node-RED',
             };
+            var body, fname;
+
+            if (Buffer.isBuffer(msg.payload)) {
+                if (!msg.filename) {
+                    var fe = "bin";
+                    if ((msg.payload[0] === 0xFF)&&(msg.payload[1] === 0xD8)) { fe = "jpg"; }
+                    if ((msg.payload[0] === 0x47)&&(msg.payload[1] === 0x49)) { fe = "gif"; } 
+                    if ((msg.payload[0] === 0x42)&&(msg.payload[1] === 0x4D)) { fe = "bmp"; }
+                    if ((msg.payload[0] === 0x89)&&(msg.payload[1] === 0x50)) { fe = "png"; }
+                    fname = "attachment." + fe;
+                } else {
+                    fname = msg.filename;
+                }
+                data.attachments = [{
+                    content: msg.payload.toString('base64'),
+                    filename: fname,
+                }];
+                body = msg.description || " ";
+            } else {
+                body = msg.payload.toString();
+            }
 
             if (config.content === "html") {
-                data.html = msg.payload.toString();
+                data.html = body;
             } else {
-                data.text = msg.payload.toString();
+                data.text = body;
             }
 
             sgMail.send(data, function (err) {

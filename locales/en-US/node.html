@@ -6,4 +6,6 @@
     blank it should be set using the <code>msg.to</code> property of the incoming message.
     you can also specify <code>msg.cc</code> and/or <code>msg.bcc</code> properties.</p>
     <p>You can set sender in <code>msg.from</code> of the payload.</p>
+    <p>If the payload is a binary buffer then it will be converted to an attachment.
+    The filename should be set using <code>msg.filename</code>. Optionally <code>msg.description</code> can be added for the body text.</p>
 </script>
