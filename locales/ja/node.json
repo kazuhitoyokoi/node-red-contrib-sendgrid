@@ -2,7 +2,7 @@
     "sendgrid": {
         "label": {
             "apiKey": "APIキー",
-            "apiKeyPlaceholder": "SendGrid設定ページのAPIキーを貼り付けてください",
+            "apiKeyPlaceholder": "SendGrid設定ページのAPIキーを貼り付け",
             "from": "送信元",
             "to": "宛先",
             "format": "形式",
