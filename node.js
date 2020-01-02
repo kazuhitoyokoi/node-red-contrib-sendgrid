@@ -14,9 +14,9 @@ module.exports = function (RED) {
 
             var data = {
                 from: config.from || msg.from,
-                to: config.to || msg.to,
-                cc: msg.cc,
-                bcc: msg.bcc,
+                to: (config.to || msg.to || '').split(/,|;| /),
+                cc: (msg.cc || '').split(/,|;| /),
+                bcc: (msg.bcc || '').split(/,|;| /),
                 subject: msg.topic || msg.title || 'Message from Node-RED',
             };
             var body, fname;
