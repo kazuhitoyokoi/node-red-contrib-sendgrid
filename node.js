@@ -1,40 +1,28 @@
+var sgMail = require('@sendgrid/mail');
+var fileType = require('file-type');
+
 module.exports = function (RED) {
     'use strict';
     function SendGridNode(config) {
         RED.nodes.createNode(this, config);
         var node = this;
         node.on('input', function (msg, send, done) {
-            send = send || function() {
+            send = send || function () {
                 node.send.apply(node, arguments);
             };
             node.status({fill: "blue", shape: "dot", text: "sendgrid.status.sending"});
-
-            const sgMail = require('@sendgrid/mail');
-            sgMail.setApiKey(node.credentials.key);
-
+            var body;
             var data = {
                 from: config.from || msg.from,
-                to: (config.to || msg.to || '').split(/(,|;| )+/),
-                cc: (msg.cc || '').split(/(,|;| )+/),
-                bcc: (msg.bcc || '').split(/(,|;| )+/),
+                to: (config.to || msg.to || '').split(/[,; ]+/g),
+                cc: (msg.cc || '').split(/[,; ]+/g),
+                bcc: (msg.bcc || '').split(/[,; ]+/g),
                 subject: msg.topic || msg.title || 'Message from Node-RED',
             };
-            var body, fname;
-
             if (Buffer.isBuffer(msg.payload)) {
-                if (!msg.filename) {
-                    var fe = "bin";
-                    if ((msg.payload[0] === 0xFF)&&(msg.payload[1] === 0xD8)) { fe = "jpg"; }
-                    if ((msg.payload[0] === 0x47)&&(msg.payload[1] === 0x49)) { fe = "gif"; } 
-                    if ((msg.payload[0] === 0x42)&&(msg.payload[1] === 0x4D)) { fe = "bmp"; }
-                    if ((msg.payload[0] === 0x89)&&(msg.payload[1] === 0x50)) { fe = "png"; }
-                    fname = "attachment." + fe;
-                } else {
-                    fname = msg.filename;
-                }
                 data.attachments = [{
                     content: msg.payload.toString('base64'),
-                    filename: fname,
+                    filename: msg.filename || "attachment." + fileType(msg.payload).ext
                 }];
                 body = msg.description || " ";
             } else {
@@ -47,6 +35,7 @@ module.exports = function (RED) {
                 data.text = body;
             }
 
+            sgMail.setApiKey(node.credentials.key);
             sgMail.send(data, function (err) {
                 if (err) {
                     node.status({fill: "red", shape: "ring", text: "sendgrid.status.sendfail"});
