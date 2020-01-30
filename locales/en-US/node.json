@@ -4,10 +4,13 @@
             "apiKey": "API key",
             "apiKeyPlaceholder": "Paste API Key created in SendGrid settings",
             "from": "From",
+            "multiple": "Multiple",
             "to": "To",
             "format": "Format",
             "text": "text",
-            "html": "html"
+            "html": "html",
+            "templateId": "Template ID",
+            "templateData": "Template Data"
         },
         "status": {
             "sending": "sending",

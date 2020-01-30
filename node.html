@@ -4,6 +4,7 @@
     color: '#489be8',
     defaults: {
       from: {value: ""},
+      multiple: {value: false},
       to: {value: ""},
       name: {value: ""},
       content: {value: "text"},
@@ -84,6 +85,10 @@
     <input type="text" id="node-input-from" placeholder="example@example.com">
   </div>
   <div class="form-row">
+    <label for="node-input-multiple"><i class="fa fa-reply-all"></i> <span data-i18n="sendgrid.label.multiple"></label>
+    <input type="checkbox" id="node-input-multiple">
+  </div>
+  <div class="form-row">
     <label for="node-input-to"><i class="fa fa-envelope"></i> <span data-i18n="sendgrid.label.to"></label>
     <input type="text" id="node-input-to" placeholder="youremail@ddress.com">
   </div>
@@ -99,11 +104,11 @@
     <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
   </div>
   <div class="form-row">
-    <label for="node-input-templateId"><i class="fa fa-tag"></i> Template ID </label>
+    <label for="node-input-templateId"><i class="fa fa-tag"></i><span data-i18n="sendgrid.label.templateId"></span></label>
     <input type="text" id="node-input-templateId">
   </div>
   <div class="form-row" style="position: relative;margin-bottom:0;">
-    <label for="node-input-templateData"><i class="fa fa-file-code-o"></i> Dynamic template data </span></label>
+    <label for="node-input-templateData"><i class="fa fa-file-code-o"></i><span data-i18n="sendgrid.label.templateData"></span></label>
     <input type="hidden" id="node-input-templateData">
     <div style="position: absolute; right:0;display:inline-block; text-align: right; font-size: 0.8em;">
         <button id="node-templateData-expand-editor" class="red-ui-button red-ui-button-small"><i class="fa fa-expand"></i></button>
