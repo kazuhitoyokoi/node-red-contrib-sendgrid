@@ -18,21 +18,25 @@ module.exports = function (RED) {
                 cc: (msg.cc || '').split(/[,; ]+/g),
                 bcc: (msg.bcc || '').split(/[,; ]+/g),
                 subject: msg.topic || msg.title || 'Message from Node-RED',
+                templateId: config.templateId || msg.templateId,
+                dynamic_template_data: JSON.parse(config.templateData || msg.templateData || '{}'),
             };
-            if (Buffer.isBuffer(msg.payload)) {
-                data.attachments = [{
-                    content: msg.payload.toString('base64'),
-                    filename: msg.filename || "attachment." + fileType(msg.payload).ext
-                }];
-                body = msg.description || " ";
-            } else {
-                body = msg.payload.toString();
-            }
+            if(!config.templateId) {
+                if (Buffer.isBuffer(msg.payload)) {
+                    data.attachments = [{
+                        content: msg.payload.toString('base64'),
+                        filename: msg.filename || "attachment." + fileType(msg.payload).ext
+                    }];
+                    body = msg.description || " ";
+                } else {
+                    body = msg.payload.toString();
+                }
 
-            if (config.content === "html") {
-                data.html = body;
-            } else {
-                data.text = body;
+                if (config.content === "html") {
+                    data.html = body;
+                } else {
+                    data.text = body;
+                }
             }
 
             sgMail.setApiKey(node.credentials.key);
