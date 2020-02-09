@@ -14,12 +14,12 @@ module.exports = function (RED) {
             var body;
             var data = {
                 from: config.from || msg.from,
-                to: (config.to || msg.to || '').split(/[,; ]+/g),
+                to: (to => Array.isArray(to) ? to : to.split(/[,; ]+/g))(config.to || msg.to || ''),
                 cc: (msg.cc || '').split(/[,; ]+/g),
                 bcc: (msg.bcc || '').split(/[,; ]+/g),
                 subject: msg.topic || msg.title || 'Message from Node-RED',
                 templateId: config.templateId || msg.templateId,
-                dynamic_template_data: JSON.parse(config.templateData || msg.templateData || '{}'),
+                dynamic_template_data: (data => typeof data === 'object' ? data : JSON.parse(data))(config.templateData || msg.templateData || '{}'),
             };
             if(!config.templateId) {
                 if (Buffer.isBuffer(msg.payload)) {
@@ -40,7 +40,7 @@ module.exports = function (RED) {
             }
 
             sgMail.setApiKey(node.credentials.key);
-            sgMail.send(data, function (err) {
+            sgMail.send(data, config.multiple, function (err) {
                 if (err) {
                     node.status({fill: "red", shape: "ring", text: "sendgrid.status.sendfail"});
                     if (done) {
