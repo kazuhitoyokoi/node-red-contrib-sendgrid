@@ -100,10 +100,6 @@
     </select>
   </div>
   <div class="form-row">
-    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
-    <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
-  </div>
-  <div class="form-row">
     <label for="node-input-templateId"><i class="fa fa-tag"></i><span data-i18n="sendgrid.label.templateId"></span></label>
     <input type="text" id="node-input-templateId">
   </div>
@@ -113,45 +109,49 @@
     <div style="position: absolute; right:0;display:inline-block; text-align: right; font-size: 0.8em;">
         <button id="node-templateData-expand-editor" class="red-ui-button red-ui-button-small"><i class="fa fa-expand"></i></button>
     </div>
-</div>
-    <div class="form-row node-text-editor-row">
-      <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-templateData-editor" ></div>
+  </div>
+  <div class="form-row node-text-editor-row">
+    <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-templateData-editor"></div>
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+    <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
   </div>
 </script>
 
-<script type="text/x-red" data-help-name="sendgrid">
-	<p>Sends the <code>msg.payload</code> as an email, with a subject of <code>msg.topic</code>.</p>
-	<h3>Inputs</h3>
-	<dl class="message-properties">
-		<dt>msg.from</dt>
-			<span class="property-type">string</span>
-			<dd>Sender of the message</dd>
-		<dt>msg.to</dt>
-			<span class="property-type">string</span>
-			<dd>Recipient of the message</dd>
-		<dt>msg.topic || msg.title</dt>
-			<span class="property-type">string</span>
-			<dd>Subject of the email</dd>
-		<dt>msg.cc</dt>
-			<span class="property-type">string</span>
-			<dd>Optional carbon copy</dd>
-		<dt>msg.bcc</dt>
-			<span class="property-type">string</span>
-			<dd>Optional blind carbon copy</dd>
-		<dt>msg.templateId</dt>
-			<span class="property-type">string</span>
-			<dd>Sendgrid dynamic template ID</dd>
-		<dt>msg.templateData</dt>
-			<span class="property-type">string</span>
-			<dd>Data to fill the dynamic template</dd>
-      <dt>payload
-			<span class="property-type">string | buffer</span>
-			<dd>If a `String`, body of the email or attachement if it's a `Buffer`</dd>
-       </dt>
-	</dl>
-	<h3>Details</h3>
-	<p>The default message recipient can be configured in the node.If it is left blank, it should be set using the <code>msg.to</code> property of the incoming message. You can also specify <code>msg.cc</code> and/or <code>msg.bcc</code> properties.</p>
-	<p>You can set sender of <code>msg.from</code> in the payload. If the payload is a binary buffer then it will be converted to an attachment. The filename should be set using <code>msg.filename</code>. Optionally <code>msg.description</code> can be added for the body text.</p>
-	<p>Optionally, you can provide a [dynamic template ID](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/) and data to use this node as a dynamic transactional tempale.</p>
-	<p>In case your sending multiple emails but want to send each one individually, you can check the `Multiple` checkbox</p>
+<script type="text/html" data-help-name="sendgrid">
+  <p>Sends the <code>msg.payload</code> as an email, with a subject of <code>msg.topic</code>.</p>
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+    <dt>msg.from</dt>
+    <span class="property-type">string</span>
+    <dd>Sender of the message</dd>
+    <dt>msg.to</dt>
+    <span class="property-type">string</span>
+    <dd>Recipient of the message</dd>
+    <dt>msg.topic || msg.title</dt>
+    <span class="property-type">string</span>
+    <dd>Subject of the email</dd>
+    <dt>msg.cc</dt>
+    <span class="property-type">string</span>
+    <dd>Optional carbon copy</dd>
+    <dt>msg.bcc</dt>
+    <span class="property-type">string</span>
+    <dd>Optional blind carbon copy</dd>
+    <dt>msg.templateId</dt>
+    <span class="property-type">string</span>
+    <dd>Sendgrid dynamic template ID</dd>
+    <dt>msg.templateData</dt>
+    <span class="property-type">string</span>
+    <dd>Data to fill the dynamic template</dd>
+    <dt>payload</dt>
+    <span class="property-type">string | buffer</span>
+    <dd>If a `String`, body of the email or attachement if it's a `Buffer`</dd>
+  </dt>
+  </dl>
+  <h3>Details</h3>
+  <p>The default message recipient can be configured in the node.If it is left blank, it should be set using the <code>msg.to</code> property of the incoming message. You can also specify <code>msg.cc</code> and/or <code>msg.bcc</code> properties.</p>
+  <p>You can set sender of <code>msg.from</code> in the payload. If the payload is a binary buffer then it will be converted to an attachment. The filename should be set using <code>msg.filename</code>. Optionally <code>msg.description</code> can be added for the body text.</p>
+  <p>Optionally, you can provide a [dynamic template ID](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/) and data to use this node as a dynamic transactional tempale.</p>
+  <p>In case your sending multiple emails but want to send each one individually, you can check the `Multiple` checkbox</p>
 </script>
