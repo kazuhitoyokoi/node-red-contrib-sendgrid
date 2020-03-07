@@ -4,7 +4,7 @@
             "apiKey": "APIキー",
             "apiKeyPlaceholder": "SendGrid設定ページのAPIキーを貼り付け",
             "from": "送信元",
-            "multiple": "個別配信",
+            "multiple": "個別送信",
             "to": "宛先",
             "format": "形式",
             "text": "テキスト",
