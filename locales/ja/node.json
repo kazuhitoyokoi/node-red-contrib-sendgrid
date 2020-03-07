@@ -4,10 +4,14 @@
             "apiKey": "APIキー",
             "apiKeyPlaceholder": "SendGrid設定ページのAPIキーを貼り付け",
             "from": "送信元",
+            "multiple": "個別配信",
             "to": "宛先",
             "format": "形式",
             "text": "テキスト",
-            "html": "HTML"
+            "html": "HTML",
+            "template": "テンプレート",
+            "templateId": "テンプレID",
+            "templateData": "テンプレートデータ"
         },
         "status": {
             "sending": "送信中",

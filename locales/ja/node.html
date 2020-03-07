@@ -1,8 +1,30 @@
 <script type="text/html" data-help-name="sendgrid">
-    <p>SendGridサービスを使用する電子メール送信ノード。</p>
-    <p>本ノードを使用するためには、SendGridウェブサイトからAPIキーを取得する必要があります(<a href="https://sendgrid.com" target="_blank">https://sendgrid.com</a>)。</p>
-    <p><code>msg.payload</code>の内容を電子メールとして送信します。<code>msg.topic</code>を指定した場合は、電子メールの件名として使用します。</p>
-    <p>メッセージ受信者はノードに設定します。宛先を指定しない場合、メッセージの<code>msg.to</code>プロパティを使用して設定する必要があります。 <code>msg.cc</code>および/または<code>msg.bcc</code>プロパティを指定することもできます。</p>
-    <p><code>msg.from</code>には、送信者を設定できます。</p>
-    <p>ペイロードがバイナリバッファの場合、添付ファイルに変換されます。ファイル名は<code>msg.filename</code>を使用して設定する必要があります。オプションとして本文に<code>msg.description</code>を追加できます。</p>
+  <p>SendGridサービスを使用する電子メール送信ノード。</p>
+  <p>本ノードを使用するためには、SendGridウェブサイトからAPIキーを取得する必要があります(<a href="https://sendgrid.com" target="_blank">https://sendgrid.com</a>)。</p>
+  <p><code>msg.payload</code>の内容を電子メールとして送信します。<code>msg.topic</code>を指定した場合は、電子メールの件名として使用します。</p>
+  <h3>入力</h3>
+  <dl class="message-properties">
+    <dt>msg.from<span class="property-type">string</span></dt>
+    <dd>メッセージの送信者</dd>
+    <dt>msg.to<span class="property-type">string</span></dt>
+    <dd>メッセージの受信者</dd>
+    <dt>msg.topic || msg.title<span class="property-type">string</span></dt>
+    <dd>メールの件名</dd>
+    <dt>msg.cc<span class="property-type">string</span></dt>
+    <dd>CCの受信者(任意)</dd>
+    <dt>msg.bcc<span class="property-type">string</span></dt>
+    <dd>BCCの受信者(任意)</dd>
+    <dt>msg.templateId<span class="property-type">string</span></dt>
+    <dd>SendGridのダイナミックテンプレートID</dd>
+    <dt>msg.templateData<span class="property-type">string</span></dt>
+    <dd>ダイナミックテンプレートに入力するデータ</dd>
+    <dt>msg.payload<span class="property-type">string | buffer</span></dt>
+    <dd>`String`の場合は電子メールの本文、`Buffer`の場合は添付ファイル</dd>
+  </dt>
+  </dl>
+  <h3>詳細</h3>
+  <p>メッセージ受信者はノードに設定します。宛先を指定しない場合、メッセージの<code>msg.to</code>プロパティを使用して設定する必要があります。<code>msg.cc</code>および/または<code>msg.bcc</code>プロパティを指定することもできます。<code>msg.from</code>には、送信者を設定できます。</p>
+  <p>ペイロードがバイナリバッファの場合、添付ファイルに変換されます。ファイル名は<code>msg.filename</code>を使用して設定する必要があります。オプションとして本文に<code>msg.description</code>を追加できます。</p>
+  <p>オプションで、<a href="https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/">ダイナミックテンプレートID</a>とデータを提供して、このノードをダイナミックトランザクションテンプレートとして使用できます。</p>
+  <p>複数の宛先にメールを個別に送信したい場合は、`個別配信`のチェックボックスをオンにします。</p>
 </script>

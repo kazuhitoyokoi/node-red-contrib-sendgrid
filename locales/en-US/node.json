@@ -9,6 +9,7 @@
             "format": "Format",
             "text": "text",
             "html": "html",
+            "template": "Template",
             "templateId": "Template ID",
             "templateData": "Template Data"
         },
