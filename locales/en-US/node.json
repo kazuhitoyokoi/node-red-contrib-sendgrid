@@ -1,21 +1,23 @@
 {
-    "sendgrid": {
-        "label": {
-            "apiKey": "API key",
-            "apiKeyPlaceholder": "Paste API Key created in SendGrid settings",
-            "from": "From",
-            "multiple": "Multiple",
-            "to": "To",
-            "format": "Format",
-            "text": "text",
-            "html": "html",
-            "template": "Template",
-            "templateId": "Template ID",
-            "templateData": "Template Data"
-        },
-        "status": {
-            "sending": "sending",
-            "sendfail": "send failed"
-        }
+  "sendgrid": {
+    "label": {
+      "apiKey": "API key",
+      "apiKeyPlaceholder": "Paste API Key created in SendGrid settings",
+      "from": "From E-mail",
+      "subject": "Subject",
+      "fromname": "From Name",
+      "multiple": "Multiple",
+      "to": "To",
+      "format": "Format",
+      "text": "text",
+      "html": "html",
+      "template": "Template",
+      "templateId": "Template ID",
+      "templateData": "Template Data"
+    },
+    "status": {
+      "sending": "sending",
+      "sendfail": "send failed"
     }
+  }
 }

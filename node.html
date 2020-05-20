@@ -1,18 +1,20 @@
 <script type="text/javascript">
-  RED.nodes.registerType('sendgrid', {
-    category: 'social',
-    color: '#489be8',
+  RED.nodes.registerType("sendgrid", {
+    category: "social",
+    color: "#489be8",
     defaults: {
-      from: {value: ""},
-      multiple: {value: false},
-      to: {value: ""},
-      name: {value: ""},
-      content: {value: "text"},
-      templateId: {value: ""},
-      templateData: {value: ""}
+      from: { value: "" },
+      fromname: { value: "" },
+      subject: { value: "" },
+      multiple: { value: false },
+      to: { value: "" },
+      name: { value: "" },
+      content: { value: "text" },
+      templateId: { value: "" },
+      templateData: { value: "" }
     },
     credentials: {
-      key: {type: "password"},
+      key: { type: "password" }
     },
     inputs: 1,
     outputs: 0,
@@ -24,48 +26,48 @@
     oneditprepare: function() {
       var that = this;
       this.editor = RED.editor.createEditor({
-        id: 'node-input-templateData-editor',
-        mode: 'ace/mode/json',
+        id: "node-input-templateData-editor",
+        mode: "ace/mode/json",
         value: $("#node-input-templateData").val()
       });
-      var showTemplate = function () {
-        if ($("#node-input-template").prop('checked')) {
-          $('#node-input-templateId-label').show();
-          $('#node-input-templateId').show();
-          $('#node-input-templateData-label').show();
-          $('#node-input-templateData').show();
-          $('#node-input-templateData-editor').show();
-          $('#node-templateData-expand-editor').show();
+      var showTemplate = function() {
+        if ($("#node-input-template").prop("checked")) {
+          $("#node-input-templateId-label").show();
+          $("#node-input-templateId").show();
+          $("#node-input-templateData-label").show();
+          $("#node-input-templateData").show();
+          $("#node-input-templateData-editor").show();
+          $("#node-templateData-expand-editor").show();
         } else {
-          $('#node-input-templateId-label').hide();
-          $('#node-input-templateId').hide();
-          $('#node-input-templateData-label').hide();
-          $('#node-input-templateData').hide();
-          $('#node-input-templateData-editor').hide();
-          $('#node-templateData-expand-editor').hide();
+          $("#node-input-templateId-label").hide();
+          $("#node-input-templateId").hide();
+          $("#node-input-templateData-label").hide();
+          $("#node-input-templateData").hide();
+          $("#node-input-templateData-editor").hide();
+          $("#node-templateData-expand-editor").hide();
         }
       };
       showTemplate();
-      $("#node-input-template").change(function () {
+      $("#node-input-template").change(function() {
         showTemplate();
       });
       $("#node-templateData-expand-editor").on("click", function(e) {
         e.preventDefault();
         var value = that.editor.getValue();
         RED.editor.editText({
-          mode: 'json',
+          mode: "json",
           value: value,
           width: "Infinity",
           cursor: that.editor.getCursorPosition(),
-          complete: function(v,cursor) {
+          complete: function(v, cursor) {
             that.editor.setValue(v, -1);
-            that.editor.gotoLine(cursor.row+1,cursor.column,false);
+            that.editor.gotoLine(cursor.row + 1, cursor.column, false);
             setTimeout(function() {
               that.editor.focus();
-            },300);
+            }, 300);
           }
         });
-      })
+      });
     },
     oneditsave: function() {
       $("#node-input-templateData").val(this.editor.getValue());
@@ -79,12 +81,14 @@
     oneditresize: function(size) {
       var rows = $("#dialog-form>div:not(.node-text-editor-row)");
       var height = $("#dialog-form").height();
-      for (var i=0; i<rows.length; i++) {
+      for (var i = 0; i < rows.length; i++) {
         height -= $(rows[i]).outerHeight(true);
       }
       var editorRow = $("#dialog-form>div.node-text-editor-row");
-      height -= (parseInt(editorRow.css("marginTop"))+parseInt(editorRow.css("marginBottom")));
-      $(".node-text-editor").css("height",height+"px");
+      height -=
+        parseInt(editorRow.css("marginTop")) +
+        parseInt(editorRow.css("marginBottom"));
+      $(".node-text-editor").css("height", height + "px");
       this.editor.resize();
     }
   });
@@ -102,8 +106,16 @@
     <input type="password" id="node-input-key" data-i18n="[placeholder]sendgrid.label.apiKeyPlaceholder">
   </div>
   <div class="form-row">
-    <label for="node-input-from"><i class="fa fa-user"></i> <span data-i18n="sendgrid.label.from"></label>
+    <label for="node-input-from"><i class="fa fa-envelope"></i> <span data-i18n="sendgrid.label.from"></label>
     <input type="text" id="node-input-from" placeholder="example@example.com">
+  </div>
+  <div class="form-row">
+    <label for="node-input-fromname"><i class="fa fa-user"></i> <span data-i18n="sendgrid.label.fromname"></label>
+    <input type="text" id="node-input-fromname" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-subject"><i class="fa fa-pencil"></i> <span data-i18n="sendgrid.label.subject"></label>
+    <input type="text" id="node-input-subject" placeholder="Subject">
   </div>
   <div class="form-row">
     <label for="node-input-to"><i class="fa fa-envelope"></i> <span data-i18n="sendgrid.label.to"></label>
