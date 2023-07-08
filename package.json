@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "file-type": "12.4.2",
-    "@sendgrid/mail": "6.4.0"
+    "@sendgrid/mail": "7.7.0"
   },
   "node-red": {
     "nodes": {
